@@ -16,7 +16,8 @@ import javax.swing.JFrame;
  * @author phamn
  */
 public abstract class GameScreen extends JFrame implements KeyListener{
-
+    //extends exception: xử lí ngoại lệ - extend: kế thừa class
+    //implements Runnable - implemetns: kế thừa interface
     public static int KEY_PRESSED = 0;
     public static int KEY_RELEASED = 1;
     

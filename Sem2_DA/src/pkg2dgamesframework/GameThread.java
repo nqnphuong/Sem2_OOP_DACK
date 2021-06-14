@@ -15,11 +15,12 @@ import javax.swing.JPanel;
  *
  * @author phamn
  */
-public class GameThread extends JPanel implements Runnable{ //lắng nghe được các phím
+
+public class GameThread extends JPanel implements Runnable{ //(1)lắng nghe được các phím - THREAD - implements từ interface Runnable.
     
     private GameScreen context;
     
-    private Thread thread;
+    private Thread thread;  //THREAD
     
     private Graphics ThisGraphics;
     
@@ -36,11 +37,11 @@ public class GameThread extends JPanel implements Runnable{ //lắng nghe đư�
         MasterWidth = context.CUSTOM_WIDTH;
         MasterHeight = context.CUSTOM_HEIGHT;
         
-        this.thread = new Thread(this);
+        this.thread = new Thread(this); //gọi new Theard - tạo đối tượng
         
     }
     public void StartThread(){
-        thread.start();
+        thread.start(); //gọi phương thức start để luồng có thể hoạt động
     }
     public void paint(Graphics g){
         g.setColor(Color.white);
@@ -64,7 +65,7 @@ public class GameThread extends JPanel implements Runnable{ //lắng nghe đư�
 
     
     @Override
-    public void run() {
+    public void run() { //(2)
         
         long T = 1000/FPS;
         long TimeBuffer = T/2;

@@ -5,8 +5,9 @@
  */
 package sem2_da;
 
-import JDBC.entity_Score;
-import JDBC.maxScore;
+import Controller.DAOScore;
+import Model.entity_Score;
+import View.maxScore;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -46,14 +47,15 @@ public class Sem2_DA extends GameScreen {
 
     private int endPoint = 0;
 
+    private View.login login;
     public String name;
-//    private SoundPlayer heartSound;
 //    private int maxScore =0;
 //    private Date date;
 
     public Sem2_DA() {
         super(1000, 700); //setsize
-        setTitle("Sem2_DACK_JAVA.NC");
+        name = login.name;
+        setTitle(name);
         try {
             hero = ImageIO.read(new File("Assets/hero.png"));
         } catch (IOException ex) {
@@ -75,8 +77,9 @@ public class Sem2_DA extends GameScreen {
         land = new Land();
         sky = new Sky();
         planetGrp = new PlanetGrp();
-
-//        heartSound = new SoundPlayer(new File("Assets/fap.wav"));
+        
+        
+        System.out.println(name);
         //đặt code trên phần này
         BeginGame(); //khởi chạy thread
     }
@@ -88,7 +91,8 @@ public class Sem2_DA extends GameScreen {
         // TODO code application logic here
         Sem2_DA main = new Sem2_DA();
     }
-
+    
+    
     private void resertGame() {
         Hero.setPos(350, 350);
         Hero.setVt(0);
@@ -101,8 +105,8 @@ public class Sem2_DA extends GameScreen {
     public void updateScore() {
         LocalTime times = java.time.LocalTime.now();
         LocalDate dates = java.time.LocalDate.now();
-        entity_Score score = new entity_Score(endPoint, times, dates);
-        maxScore.Them(score);
+        entity_Score score = new entity_Score(getTitle(),endPoint, times, dates);
+        DAOScore.Them(score);
         System.out.println(endPoint + " " + times + " " + dates);
 
     }
@@ -126,6 +130,7 @@ public class Sem2_DA extends GameScreen {
             } else {
                 heart += 0.3;
             }
+            
 
             for (int i = 0; i < planetGrp.SIZE; i++) {
                 if (Hero.getRect().intersects(planetGrp.getPlanet(i).getRect()) || heart <= 0) {
